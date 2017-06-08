@@ -2,6 +2,7 @@ $(document).ready(function() {
  	$('[data-toggle=offcanvas]').click(function() {
     $('.row-offcanvas').toggleClass('active');
   });
+});
 
 var map;
       // Create a new blank array for all the listing markers.
@@ -79,4 +80,3 @@ var map;
           markers[i].setMap(null);
         }
       }
-});

@@ -26,7 +26,28 @@ function initMap() {
     var largeInfoWindow = new google.maps.InfoWindow();
 
     // Limits the map to display all the locations on the screen
-    var bounds = new google.maps.LatLngBounds();	
+    var bounds = new google.maps.LatLngBounds();
+
+    // The following uses the location array to create an array of markers on initialize.
+	for (var i = 0; i < resLocations.length; i++) {
+		// Get the position from the location array.
+		var position = resLocations[i].location;
+		var title = resLocations[i].title;
+		// Create a marker per location, and put into markers array.
+		var marker = new google.maps.Marker({
+		map: map,
+		position: position,
+		title: title,
+		animation: google.maps.Animation.DROP,
+		id: i
+		});
+		// Push the marker to our array of markers.
+		markers.push(marker);
+		// Create an onclick event to open an infowindow at each marker.
+		marker.addListener('click', function() {
+		populateInfoWindow(this, largeInfowindow);
+		});
+	}	
 }
 
 // My ViewModel
@@ -46,26 +67,7 @@ function ViewModel(){
         
 ko.applyBindings(new ViewModel());
 
-// // The following group uses the location array to create an array of markers on initialize.
-// for (var i = 0; i < locations.length; i++) {
-// 	// Get the position from the location array.
-// 	var position = locations[i].location;
-// 	var title = locations[i].title;
-// 	// Create a marker per location, and put into markers array.
-// 	var marker = new google.maps.Marker({
-// 	map: map,
-// 	position: position,
-// 	title: title,
-// 	animation: google.maps.Animation.DROP,
-// 	id: i
-// 	});
-// 	// Push the marker to our array of markers.
-// 	markers.push(marker);
-// 	// Create an onclick event to open an infowindow at each marker.
-// 	marker.addListener('click', function() {
-// 	populateInfoWindow(this, largeInfowindow);
-// 	});
-// }
+
 // $('#show-listings').on('click', showListings);
 // $('#hide-listings').on('click', hideListings);
 

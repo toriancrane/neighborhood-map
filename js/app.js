@@ -72,7 +72,18 @@ var LocationModel = function(coordinates, viewModel) {
 				animation: google.maps.Animation.DROP
 			});
 			self.resMarker.setVisible(true);
-			self.cStr
+			self.cStr = ko.computed(function(){
+				return '<div><i>' + self.title + '</i></div>' +
+						'<div>' + self.address + '</div>' + 
+						'<div>' + self.city + ',' + self.state + self.zipcode + '</div>';
+			});
+			self.resMarker.addListener('click', function(){
+				function removeSpaces(str){
+					str.replace(/\s+/g, '-').toLowerCase();
+				}
+				var yelpURL = 'api.yelp.com/v2/business/' + removedSpaces(self.title)
+			})
+			www.yelp.com/biz/name-city
 		}
 	})
 }

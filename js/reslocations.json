@@ -1,0 +1,59 @@
+{
+	"resLocations": [
+        	{
+        		"title": "OHYA Sushi, Korean Kitchen & Bar", 
+        		"address": "4920 W Thunderbird Rd", 
+        		"city": "Glendale",
+        		"state": "AZ",
+        		"zipcode": "85306",
+        		"coordinates": {
+        			"lat": 33.611548, 
+        			"lng": -112.165117
+        		}
+        	},
+        	{
+        		"title": "Pullano's Pizza", 
+        		"address": "13848 N 51st Ave",
+        		"city": "Glendale",
+        		"state": "AZ",
+        		"zipcode": "85306",
+        		"coordinates": {
+        			"lat": 33.612199, 
+        			"lng": -112.169104
+        		}
+        	},
+        	{
+        		"title": "Bangkok Thai B-B-Q", 
+        		"address": "13828 N 51st Ave",
+        		"city": "Glendale",
+        		"state": "AZ",
+        		"zipcode": "85306", 
+        		"coordinates": {
+        			"lat": 33.611598, 
+        			"lng": -112.170436
+        		}
+        	},
+        	{
+        		"title": "Rocket Burger", 
+        		"address": "12038 N 35th Ave #2",
+        		"city": "Glendale",
+        		"state": "AZ",
+        		"zipcode": "85029",
+        		"coordinates": {
+        			"lat": 33.595876, 
+        			"lng": -112.134478
+        		}
+        	},
+        	{
+        		"title": "Don Ruben's Mexican", 
+        		"address": "4323 W Cactus Rd",
+        		"city": "Glendale",
+        		"state": "AZ",
+        		"zipcode": "85304",
+        		"coordinates": {
+        			"lat": 33.595647, 
+        			"lng": -112.152177
+        		}
+        	}
+        ]
+}

@@ -8,16 +8,21 @@ function googleMapError(){
   alert("Google Maps API is not loading...");
 }
 
-var resLocations = [
-        	{title: 'OHYA Sushi, Korean Kitchen & Bar', address: '4920 W Thunderbird Rd, Glendale, AZ 85306', location: {lat: 33.611548, lng: -112.165117}},
-        	{title: "Pullano's Pizza", address: '13848 N 51st Ave, Glendale, AZ 85306', location: {lat: 33.612199, lng: -112.169104}},
-        	{title: 'Bangkok Thai B-B-Q', address: '13828 N 51st Ave, Glendale, AZ 85306', location: {lat: 33.611598, lng: -112.170436}},
-        	{title: 'Rocket Burger', address: '12038 N 35th Ave #2, Phoenix, AZ 85029', location: {lat: 33.595876, lng: -112.134478}},
-        	{title: "Don Ruben's Mexican", address: '4323 W Cactus Rd, Glendale, AZ 85304', location: {lat: 33.595647, lng: -112.152177}}
-        ];
+// var resLocations = [
+//         	{title: 'OHYA Sushi, Korean Kitchen & Bar', address: '4920 W Thunderbird Rd, Glendale, AZ 85306', location: {lat: 33.611548, lng: -112.165117}},
+//         	{title: "Pullano's Pizza", address: '13848 N 51st Ave, Glendale, AZ 85306', location: {lat: 33.612199, lng: -112.169104}},
+//         	{title: 'Bangkok Thai B-B-Q', address: '13828 N 51st Ave, Glendale, AZ 85306', location: {lat: 33.611598, lng: -112.170436}},
+//         	{title: 'Rocket Burger', address: '12038 N 35th Ave #2, Phoenix, AZ 85029', location: {lat: 33.595876, lng: -112.134478}},
+//         	{title: "Don Ruben's Mexican", address: '4323 W Cactus Rd, Glendale, AZ 85304', location: {lat: 33.595647, lng: -112.152177}}
+//         ];
 
 var map;
+var resMarker;
 var markers = [];
+
+var resLocations = [];
+var viewModel;
+var cStr;
 
 // Constructor creates a new map - only center and zoom are required.
 function initMap() {
@@ -26,32 +31,50 @@ function initMap() {
 	zoom: 14
 	});
 
-	// Creates infowindow object to display restaurant info
-    var largeInfoWindow = new google.maps.InfoWindow();
-
-    // Limits the map to display all the locations on the screen
+	// Limits the map to display all the locations on the screen
     var bounds = new google.maps.LatLngBounds();
 
-    // The following uses the location array to create an array of markers on initialize.
-	for (var i = 0; i < resLocations.length; i++) {
-		// Get the position from the location array.
-		var position = resLocations[i].location;
-		var title = resLocations[i].title;
-		// Create a marker per location, and put into markers array.
-		var marker = new google.maps.Marker({
-		map: map,
-		position: position,
-		title: title,
-		animation: google.maps.Animation.DROP,
-		id: i
+
+}
+
+//My list model that calls the info from my json file
+function ResListModel(restaurants){
+	$.ajax({
+		method: 'get',
+		dataType: 'json',
+		url: '/js/reslocations.json'
+	}).done(function(data){
+		var resLocations = data.resLocations;
+		resLocations.forEach(function(coordinates, i){
+			viewModel.restaurants.push(new LocationModel(coordinates, viewModel));
 		});
-		// Push the marker to our array of markers.
-		markers.push(marker);
-		// Create an onclick event to open an infowindow at each marker.
-		marker.addListener('click', function() {
-		populateInfoWindow(this, largeInfowindow);
-		});
-	}	
+	}).fail(function(err){
+		console.error(err);
+	});
+}
+
+var LocationModel = function(coordinates, viewModel) {
+	var self = this;
+	self.title = coordinates.title;
+	self.address = coordinates.address;
+	self.city = coordinates.city;
+	self.state = coordinates.state;
+	self.zipcode = coordinates.zipcode;
+	self.coordinates = coordinates.coordinates;
+
+	self.createMarker = ko.computed(function(){
+		if (viewModel.google()){
+			self.resMarker = new google.maps.Marker({
+				coordinates: self.coordinates,
+				map: map,
+				title: self.title,
+				visible: true,
+				animation: google.maps.Animation.DROP
+			});
+			self.resMarker.setVisible(true);
+			self.cStr
+		}
+	})
 }
 
 // My ViewModel
@@ -69,7 +92,42 @@ function ViewModel(){
    },this);
 }
         
+
+
+
+// Creates infowindow object to display restaurant info
+    var largeInfoWindow = new google.maps.InfoWindow();
+
+    
+
+ //    // The following uses the location array to create an array of markers on initialize.
+	// for (var i = 0; i < resLocations.length; i++) {
+	// 	// Get the position from the location array.
+	// 	var position = resLocations[i].location;
+	// 	var title = resLocations[i].title;
+	// 	// Create a marker per location, and put into markers array.
+	// 	var marker = new google.maps.Marker({
+	// 	map: map,
+	// 	position: position,
+	// 	title: title,
+	// 	animation: google.maps.Animation.DROP,
+	// 	id: i
+	// 	});
+	// 	// Push the marker to our array of markers.
+	// 	markers.push(marker);
+	// 	// Create an onclick event to open an infowindow at each marker.
+	// 	marker.addListener('click', function() {
+	// 	populateInfoWindow(this, largeInfowindow);
+	// 	});
+	// }
+
+
+
 ko.applyBindings(new ViewModel());
+
+
+
+
 
 
 // $('#show-listings').on('click', showListings);

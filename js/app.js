@@ -4,6 +4,10 @@ $(document).ready(function() {
   });
 });
 
+function googleMapError(){
+  alert("Google Maps API is not loading...");
+}
+
 var resLocations = [
         	{title: 'OHYA Sushi, Korean Kitchen & Bar', address: '4920 W Thunderbird Rd, Glendale, AZ 85306', location: {lat: 33.611548, lng: -112.165117}},
         	{title: "Pullano's Pizza", address: '13848 N 51st Ave, Glendale, AZ 85306', location: {lat: 33.612199, lng: -112.169104}},

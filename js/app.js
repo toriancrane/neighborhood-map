@@ -41,6 +41,7 @@ function ResListModel(restaurants){
 			viewModel.restaurants.push(new LocationModel(coordinates, viewModel));
 		});
 	}).fail(function(err){
+		alert("The was an error with the application.");
 		console.error(err);
 	});
 }

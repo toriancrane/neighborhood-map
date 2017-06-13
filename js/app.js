@@ -87,12 +87,9 @@ var LocationModel = function(coordinates, viewModel) {
 			          var successURL = '<div><a href="' + resInfo + '" target="_blank">' + self.title + '</a></div>';
 			          //Set infowindow content
 			          viewModel.largeInfoWindow.setContent(self.cStr() + successURL);}
-			          // Open LargeInfoWindow
 			          viewModel.largeInfoWindow.open(map, self.resMarker);
 			        }).fail(function(){
-			          //Set infowindow content
 			          viewModel.largeInfoWindow.setContent(self.cStr() + "<em><br>Wikipedia data has failed to load.</em>");
-			          // Open LargeInfoWindow
 			          viewModel.largeInfoWindow.open(map, self.resMarker);
 			        });
 			        // Marker Animations

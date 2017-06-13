@@ -7,36 +7,26 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">		
 </head>
 <body>
-<div class="row-offcanvas row-offcanvas-left">
-  <div id="sidebar" class="sidebar-offcanvas">
-      <div class="col-md-12" id="nav-text">
-        <div class="text-center">
-        	<h3>Restaurants near ASU</h3>
-        </div>
-        
-        <div class="text-center">
-<!--         	<button class="btn btn-info" id="show-listings" type="button">Show Listings</button>
-        	<button class="btn btn-info" id="hide-listings" type="button">Hide Listings</button>
-        	<hr> -->
-        	<div class="search-bar">
-                <input class="search-input" id="filter" type="text" data-bind="textInput: resSearch, valueUpdate: 'afterkeydown'" placeholder="restaurant name">
+
+<div id="wrapper" class="toggled">
+        <div id="sidebar-wrapper">
+            <div class="search">
+                <input id="filter" type="text" placeholder="restaurant name" data-bind="textInput: resSearch, valueUpdate: 'afterkeydown'" class="form-control">
+                <ul class data-bind="foreach: resLocations">
+                  <a>
+                    <li data-bind="text: title, click: $parent.markerAnimator">
+                    </li>
+                  </a>
+                </ul>
             </div>
         </div>
-        <hr>
-        <ul class="nav nav-pills nav-stacked list-group" data-bind="foreach: resLocations">
-        <a>
-          <li data-bind="text: title, click: $parent.markerAnimator">
-              </li>
-        </a>
-	            
-        </ul>
-      </div>
-  </div>
-  <div id="map"></div>
-</div>
-
-
-
+        <div id="main-wrapper">
+            <h1>Restaurants near ASU West</h1>
+            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+            <div id="map">
+            </div>
+        </div>
+    </div>
 <!--Loading Scripts-->
 <script
   src="https://code.jquery.com/jquery-3.2.1.js"

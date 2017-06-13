@@ -23,8 +23,11 @@
         </div>
         <hr>
         <ul class="nav nav-pills nav-stacked list-group" data-bind="foreach: resLocations">
-	            <li data-bind="text: title, click: $parent.markerAnimator">
-	            </li>
+        <a>
+          <li data-bind="text: title, click: $parent.markerAnimator">
+              </li>
+        </a>
+	            
         </ul>
       </div>
   </div>

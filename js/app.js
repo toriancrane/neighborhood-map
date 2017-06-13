@@ -13,7 +13,7 @@ var resMarker;
 var markers = [];
 
 var resLocations = [];
-var viewModel;
+var ViewModel;
 var cStr;
 
 // Constructor creates a new map - only center and zoom are required.
@@ -25,6 +25,7 @@ function initMap() {
 
 	// Limits the map to display all the locations on the screen
     var bounds = new google.maps.LatLngBounds();
+    viewModel.google(!!window.google);
 }
 
 //My list model that calls the info from my json file
@@ -51,12 +52,12 @@ var LocationModel = function(coordinates, viewModel) {
 	self.city = coordinates.city;
 	self.state = coordinates.state;
 	self.zipcode = coordinates.zipcode;
-	self.coordinates = coordinates.coordinates;
+	self.position = coordinates.coordinates;
 
 	self.createMarker = ko.computed(function(){
 		if (viewModel.google()){
 			self.resMarker = new google.maps.Marker({
-				coordinates: self.coordinates,
+				position: self.position,
 				map: map,
 				title: self.title,
 				visible: true,
@@ -80,7 +81,7 @@ var LocationModel = function(coordinates, viewModel) {
 			        }).done(function(response){
 			          var resInfo = response[3][0];
 			          if (resInfo === undefined){
-			          var errorURL = 'Wikipedia Article unavailabe for' + self.title;
+			          var errorURL = 'Wikipedia Article unavailabe for ' + self.title;
 			          viewModel.largeInfoWindow.setContent(self.cStr() + errorURL);
 			          } else {
 			          var successURL = '<div><a href="' + resInfo + '" target="_blank">' + self.title + '</a></div>';
@@ -95,8 +96,8 @@ var LocationModel = function(coordinates, viewModel) {
 			          viewModel.largeInfoWindow.open(map, self.resMarker);
 			        });
 			        // Marker Animations
-			        self.marker.setAnimation(google.maps.Animation.BOUNCE);
-			        setTimeout (function(){self.marker.setAnimation(null);}, 750);
+			        self.resMarker.setAnimation(google.maps.Animation.BOUNCE);
+			        setTimeout (function(){self.resMarker.setAnimation(null);}, 750);
 			      });
 				}
 			})
@@ -119,7 +120,7 @@ var ViewModel = function(LocationModel) {
   // Search Filter
   self.resSearch = ko.observable("");
 
-  self.visibleLocations = ko.computed(function(){
+  self.resLocations = ko.computed(function(){
     var filter = self.resSearch().toLowerCase();
     return ko.utils.arrayFilter(self.restaurants(), function(coordinates){
       var resResults = coordinates.title.toLowerCase().indexOf(filter) >= 0;

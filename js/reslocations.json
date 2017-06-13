@@ -1,25 +1,25 @@
 {
 	"resLocations": [
         	{
-        		"title": "OHYA Sushi, Korean Kitchen & Bar", 
-        		"address": "4920 W Thunderbird Rd", 
+        		"title": "Einstein Bros", 
+        		"address": "5894 W Thunderbird Rd", 
         		"city": "Glendale",
         		"state": "AZ",
         		"zipcode": "85306",
         		"coordinates": {
-        			"lat": 33.611548, 
-        			"lng": -112.165117
+        			"lat": 33.611179, 
+        			"lng": -112.185541
         		}
         	},
         	{
-        		"title": "Pullano's Pizza", 
-        		"address": "13848 N 51st Ave",
+        		"title": "Chipotle Mexican Grill", 
+        		"address": "5880 W Thunderbird Rd",
         		"city": "Glendale",
         		"state": "AZ",
         		"zipcode": "85306",
         		"coordinates": {
-        			"lat": 33.612199, 
-        			"lng": -112.169104
+        			"lat": 33.611320, 
+        			"lng": -112.184520
         		}
         	},
         	{

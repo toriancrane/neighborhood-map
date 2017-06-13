@@ -97,7 +97,7 @@ var LocationModel = function(coordinates, viewModel) {
 			        setTimeout (function(){self.resMarker.setAnimation(null);}, 750);
 			      });
 				}
-			})
+			});
 		};
 
 // My ViewModel

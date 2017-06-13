@@ -8,25 +8,41 @@
 </head>
 <body>
 
-<div id="wrapper" class="toggled">
-        <div id="sidebar-wrapper">
-            <div class="search">
-                <input id="filter" type="text" placeholder="restaurant name" data-bind="textInput: resSearch, valueUpdate: 'afterkeydown'" class="form-control">
-                <ul class data-bind="foreach: resLocations">
-                  <a>
-                    <li data-bind="text: title, click: $parent.markerAnimator">
-                    </li>
-                  </a>
-                </ul>
-            </div>
+<div class="container-fluid">
+<div class="row">
+  <div class="col-sm-2">
+    <div class="sidebar-nav">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="visible-xs navbar-brand">Sidebar menu</span>
         </div>
-        <div id="main-wrapper">
-            <h1>Restaurants near ASU West</h1>
-            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-            <div id="map">
-            </div>
-        </div>
+        <div class="navbar-collapse collapse sidebar-navbar-collapse">
+        	<h3>Restaurants near ASU</h3>
+        	<hr>
+	        <input id="filter" type="text" placeholder="restaurant name" data-bind="textInput: resSearch, valueUpdate: 'afterkeydown'" class="form-control">
+	        <hr>
+	        <ul class data-bind="foreach: resLocations">
+	          <a>
+	            <li data-bind="text: title, click: $parent.markerAnimator">
+	            </li>
+	          </a>
+	        </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
     </div>
+  </div>
+  <div class="col-sm-10">
+        <div id="map"></div>
+  </div>
+</div>
+</div>
 <!--Loading Scripts-->
 <script
   src="https://code.jquery.com/jquery-3.2.1.js"
